@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<title>Ayurvedic Stamina & Energy Booster</title>
+<style>
+  /* Reset margin and padding */
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+      Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background: linear-gradient(#ffffff, #f9f9f9)
+    /* color: #222;
+    line-height: 1.4;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; */
+  }
+  /* Marquee */
+  .marquee-container {
+    background: #6c5dd3;
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    height: 30px;
+    padding-top: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .marquee-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 12s linear infinite;
+  }
+  @keyframes marquee {
+    0% { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
+  /* Container */
+  .container {
+    max-width: 420px;
+    width: 370px;
+    margin: 0 auto;
+    padding: 16px;
+  }
+  /* Slider */
+  .slider {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(108, 93, 211, 0.3);
+    margin: 16px 0;
+  }
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease;
+    will-change: transform;
+  }
+  .slide {
+    min-width: 100%;
+    user-select: none;
+  }
+  .slide img {
+    width: 100%;
+    display: block;
+    border-radius: 12px;
+    object-fit: cover;
+  }
+  /* Price Section */
+  .price-section {
+    text-align: center;
+    margin: 12px 0 20px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #3a2f5a;
+  }
+  .price-section .old-price {
+    text-decoration: line-through;
+    color: #999;
+    margin-right: 12px;
+    font-weight: 500;
+  }
+  .price-section .final-price {
+    color: #6c5dd3;
+  }
+  /* Buttons */
+  .btn-book {
+    display: block;
+    width: 100%;
+    background-color: #5dd367;
+    color: white;
+    font-weight: 700;
+    font-size: 1.15rem;
+    padding: 14px 0;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(108, 93, 211, 0.5);
+    transition: background-color 0.3s ease;
+    margin: 20px 0;
+    text-align: center;
+    user-select: none;
+    
+  }
+  .btn-book:hover,
+  .btn-book:focus {
+    background-color: #5749b8;
+    outline: none;
+  }
+  /* Description & Benefits */
+  .description {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .benefits {
+    list-style: none;
+    padding-left: 0;
+    margin: 0 0 24px;
+  }
+  .benefits li {
+    background: #f0e9ff;
+    color: #4b3ca7;
+    margin-bottom: 10px;
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 6px rgba(108, 93, 211, 0.15);
+  }
+  /* Herbs Grid */
+  .herbs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(80px,1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+    justify-items: center;
+  }
+  .herb-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    user-select: none;
+  }
+  .herb-item img {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 8px rgba(108, 93, 211, 0.4);
+    margin-bottom: 6px;
+  }
+  .herb-item span {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #4b3ca7;
+    text-align: center;
+  }
+  /* Feedback Section */
+  .feedback-section {
+    margin-bottom: 40px;
+  }
+  .feedback-item {
+    display: flex;
+    gap: 12px;
+    background: #f7f5ff;
+    border-radius: 12px;
+    padding: 12px 14px;
+    box-shadow: 0 2px 8px rgba(108, 93, 211, 0.15);
+    margin-bottom: 14px;
+    align-items: center;
+  }
+  .feedback-avatar {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 6px rgba(108, 93, 211, 0.4);
+  }
+  .feedback-content {
+    flex: 1;
+  }
+  .feedback-name {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #3a2f5a;
+    margin-bottom: 4px;
+  }
+  .feedback-stars {
+    color: #f5b301;
+    font-size: 1rem;
+    margin-bottom: 6px;
+    user-select: none;
+  }
+  .feedback-text {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.3;
+  }
+  /* FAQ Section */
+  .faq-section {
+    margin-bottom: 40px;
+  }
+  .faq-item {
+    border-bottom: 1px solid #ddd;
+  }
+  .faq-question {
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 14px 8px;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+    color: #3a2f5a;
+  }
+  .faq-question::after {
+    content: '+';
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.3rem;
+    transition: transform 0.3s ease;
+  }
+  .faq-item.open .faq-question::after {
+    content: '−';
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    font-size: 0.9rem;
+    color: #555;
+    padding: 0 8px;
+    transition: max-height 0.35s ease;
+  }
+  .faq-item.open .faq-answer {
+    max-height: 200px;
+    padding-top: 8px;
+    padding-bottom: 12px;
+  }
+  /* Responsive */
+  @media (max-width: 320px) {
+    .price-section {
+      font-size: 1.1rem;
+    }
+    .btn-book {
+      font-size: 1rem;
+      padding: 12px 0;
+      outline: none;
+    }
+    a{
+      text-decoration: none;
+    }
+  }
+  <style>
+  .header {
+    background: #ffffff;
+    padding: 10px 15px;
+    border-bottom: 2px solid #eee;
+    text-align: center;
+  }
+
+  .brand {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand h1 {
+    font-size: 20px;
+    color: #2c3e50;
+    margin: 0;
+  }
+
+  .logo {
+    height: 40px;
+  }
+
+  .trust-badges {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #010704;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+  }
+
+  .trust-badges span {
+    background: #6ea558;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: 1px solid rgb(0, 0, 0);
+  }
+
+  /* Mobile Only */
+  @media (max-width: 600px) {
+    .brand h1 {
+      font-size: 18px;
+    }
+    .trust-badges {
+      font-size: 12px;
+      gap: 8px;
+    }
+  }
+  .btn-book {
+  display: inline-block;
+  background: #0f9d58;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  /* width: 70%;
+ margin-left: 26px; */
+}
+.btn-book:hover {
+  background: #0c7c46;
+}
+
+</style>
+</style>
+</head>
+<body>
+  <div class="marquee-container" aria-label="Important announcement">
+    <div class="marquee-text" aria-live="polite" role="marquee">
+      Ayurvedic Stamina & Energy Booster
+    </div>
+  </div>
+  <header class="header">
+    <div class="brand">
+      <img src="/Images/duadawai.c.jpg" alt="Brand Logo" class="logo" style="height: 100px; margin-left: 20px;">
+      <!-- <h1>Duadawai</h1> -->
+    </div>
+    <div class="trust-badges">
+      <span><b>✅ Ayurvedic</b></span>
+      <span> <b>🚚 Free Shipping</b></span>
+      <span> <b>💵 Cash on Delivery</b></span>
+    </div>
+  </header>
+
+  <main class="container" role="main">
+    <!-- Slider -->
+    <div class="slider" aria-label="Product images slider">
+      <div class="slides">
+        <div class="slide">
+          <img src="/Images/mainpage.jpeg" alt="Product image 1" loading="lazy" width="100%" height="" />
+        </div>
+        <div class="slide">
+          <img src="/Images/Green.png" alt="Product image 2" loading="lazy" width="100%" height="" />
+        </div>
+        <div class="slide">
+          <img src="/Images/ne3.png" alt="Product image 3" loading="lazy" width="100%" height="372px" />
+        </div>
+        <div class="slide">
+          <img src="/Images/Green.png" alt="Product image 5" loading="lazy" width="100%" height="" />
+        </div>
+        <!-- <div class="slide"> -->
+          <!-- <img src="PRAKURTIK.png" alt="Product image 4" loading="lazy" width="372px" height="" /> -->
+        <!-- </div> -->
+       
+      </div>
+    </div>
+
+    <!-- Price -->
+    <div class="price-section" aria-label="Product price">
+      <span class="old-price" style="color:red ;"> ₹ 4200 </span>
+      <span class="final-price " style="color:black ;"> ₹ 1950</span>
+    </div>
+
+    <!-- Book Now Button 1 -->
+    <a href="/index1.html"><button class="btn-book" type="button" aria-label="Book Now"> Book Now</button></a>
+    <h1 align="center"> 👇👇 TAP HERE 👇👇</h1>
+    <iframe width="100%" height="300" src="https://www.youtube.com/embed/MB2IEvjU6Po?si=0SdSpSXEMGnAC6If" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <!-- Description & Benefits -->
+    
+    <!-- <h2>🌿 आयुर्वेदिक स्टैमिना & एनर्जी बूस्टर</h2> -->
+    <h1>🔥 आपकी परेशानी – ये सब हो रहा है? 🔥</h1>
+    <ul>
+      <li>जल्दी थक जाते हो, काम करने का मन नहीं करता।</li>
+      <li>सेक्स टाइम बहुत कम, पार्टनर खुश नहीं।</li>
+      <li>मर्दानगी कम लगती है, साइज छोटा लगता है।</li>
+      <li>शरीर में ताकत नहीं, जोश गायब।</li>
+      <li>बार-बार बीमारी, थकावट और टेंशन।</li>
+      <li>मार्केट के प्रोडक्ट में कैमिकल ज्यादा, डर लगता है।</li>
+    </ul>
+  
+    <h2>💪 हमारा हल – <span class="highlight">Jazbati Combo Kit</span> से सब सेट! 💪</h2>
+    <p>हमारी Jazbati Combo Kit में है <strong>DD69 कैप्सूल, गोल्ड कैप्सूल, ऑयल और पाउडर</strong>, 
+    जो मिलकर आपके शरीर को अंदर से मजबूत और एक्टिव बना देंगे।</p>
+  
+    <ul>
+      <li>सेक्स टाइम बढ़ेगा – लंबे समय तक पार्टनर के साथ एन्जॉय करोगे।</li>
+      <li>साइज में फर्क आएगा – आत्मविश्वास बढ़ेगा।</li>
+      <li>जोश और स्टैमिना वापस आएगा।</li>
+      <li>थकावट दूर होगी, एनर्जी पूरे दिन बनी रहेगी।</li>
+      <li>इम्यूनिटी स्ट्रॉंग – बीमारी से बचाव।</li>
+      <li>स्ट्रेस कम, मूड फ्रेश।</li>
+      <li>नैचुरल हर्ब्स – कोई कैमिकल नहीं।</li>
+      <li>सरकारी अप्रूव और लैब टेस्टेड – भरोसे के साथ।</li>
+    </ul>
+  
+    <h2>🌿 हमारे घटक – ताकत और मर्दानगी का राज 🌿</h2>
+    <p><strong>DD69 कैप्सूल / गोल्ड कैप्सूल / ऑयल / पाउडर</strong> में शामिल:</p>
+    <ul>
+      <li>अश्वगंधा – ताकत और जोश बढ़ाने वाला।</li>
+      <li>सफेद मुसली – स्टैमिना और मर्दानगी बढ़ाए।</li>
+      <li>काली मुसली – अंदर से शरीर स्ट्रॉंग बनाए।</li>
+      <li>शिलाजीत – थकावट मिटाकर एनर्जी दे।</li>
+      <li>आयुर्वेदिक तेल – दर्द कम करके आराम दे।</li>
+    </ul>
+    <p>✔ पूरी तरह नैचुरल, हर्ब्स से बना।<br>
+    ✔ हार्श कैमिकल नहीं, सेफ और भरोसेमंद।</p>
+  
+    <h2>✅ क्यों चुनें Jazbati Combo Kit? ✅</h2>
+    <ul>
+      <li>सेक्स टाइम बढ़ेगा और साइज में फर्क आएगा।</li>
+      <li>मर्दानगी में जोश और आत्मविश्वास लौटेगा।</li>
+      <li>सरकारी अप्रूव – लाइसेंस के साथ।</li>
+      <li>लैब टेस्टेड – क्वालिटी और सेफ्टी चेक की हुई।</li>
+      <li>आयुर्वेदिक – बिना साइड इफेक्ट के।</li>
+      <li>ताकत, स्टैमिना, आराम, एनर्जी सब एक साथ।</li>
+      <li>रोज़ाना यूज़ करोगे तो खुद फर्क महसूस करोगे।</li>
+    </ul>
+  
+    <h3>👉 अब देर मत करो! आज ही Jazbati Combo Kit अपनाओ और अपने शरीर में फिर से ताकत, जोश, स्टैमिना और मर्दानगी वापस लाओ!</h3>
+    <!-- Herbs Grid -->
+    <div class="herbs-grid" aria-label="Ayurvedic herbs used in product">
+      <div class="herb-item">
+        <img src="/Images/ashwagandha.jpg" alt="Ashwagandha" />
+        <span>Ashwagandha</span>
+      </div>
+      <div class="herb-item">
+        <img src="/Images/sheelajeet.jpg" alt="Shilajit" />
+        <span>Shilajit</span>
+      </div>
+      <div class="herb-item">
+        <img src="/Images/safed musli.jpg" alt="Safed Musli" />
+        <span>Safed Musli</span>
+      </div>
+      <div class="herb-item">
+        <img src="/Images/gokshru.jpg" alt="Gokshura" />
+        <span>Gokshura</span>
+      </div>
+      <div class="herb-item">
+        <img src="/Images/bala.jpg" alt="Bala" />
+        <span>Bala</span>
+      </div>
+      <div class="herb-item">
+        <img src="/Images/kapikacha.jpg" alt="Kapikacchu" />
+        <span>Kapikacchu</span>
+      </div>
+      <div class="herb-item">
+        <img src="/Images/vidirikhand.jpg" alt="Vidarikand" />
+        <span>Vidarikand</span>
+      </div>
+      <div class="herb-item">
+        <img src="/Images/mucuna.jpg" alt="Mucuna Pruriens" />
+        <span>Mucuna Pruriens</span>
+      </div>
+    </div>
+
+    <!-- Book Now Button 2 -->
+    <a href="/index1.html"><button class="btn-book" type="button" aria-label="Book Now"> Book Now</button></a>
+
+    <!-- Feedback Section -->
+    <section class="feedback-section" aria-label="Customer feedbacks">
+      <article class="feedback-item">
+        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Anjali avatar" class="feedback-avatar" loading="lazy" width="48" height="48" />
+        <div class="feedback-content">
+          <div class="feedback-name">Anjali, Mumbai</div>
+          <div class="feedback-stars" aria-label="5 star rating">★★★★★</div>
+          <p class="feedback-text">I feel energetic all day after using this product for a month!</p>
+        </div>
+      </article>
+      <article class="feedback-item">
+        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Rajesh avatar" class="feedback-avatar" loading="lazy" width="48" height="48" />
+        <div class="feedback-content">
+          <div class="feedback-name">Rajesh, Delhi</div>
+          <div class="feedback-stars" aria-label="4 star rating">★★★★☆</div>
+          <p class="feedback-text">Noticeable improvement in stamina and no side effects.</p>
+        </div>
+      </article>
+      <article class="feedback-item">
+        <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Priya avatar" class="feedback-avatar" loading="lazy" width="48" height="48" />
+        <div class="feedback-content">
+          <div class="feedback-name">Priya, Bangalore</div>
+          <div class="feedback-stars" aria-label="5 star rating">★★★★★</div>
+          <p class="feedback-text">Highly recommend! Natural and effective.</p>
+        </div>
+      </article>
+      <article class="feedback-item">
+        <img src="https://randomuser.me/api/portraits/men/35.jpg" alt="Suresh avatar" class="feedback-avatar" loading="lazy" width="48" height="48" />
+        <div class="feedback-content">
+          <div class="feedback-name">Suresh, Kolkata</div>
+          <div class="feedback-stars" aria-label="5 star rating">★★★★★</div>
+          <p class="feedback-text">Great product, delivery was fast and effects are real.</p>
+        </div>
+      </article>
+      <article class="feedback-item">
+        <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Kavita avatar" class="feedback-avatar" loading="lazy" width="48" height="48" />
+        <div class="feedback-content">
+          <div class="feedback-name">Kavita, Pune</div>
+          <div class="feedback-stars" aria-label="4 star rating">★★★★☆</div>
+          <p class="feedback-text">Good stamina booster, natural ingredients make me trust it.</p>
+        </div>
+      </article>
+      <article class="feedback-item">
+        <img src="https://randomuser.me/api/portraits/men/40.jpg" alt="Amit avatar" class="feedback-avatar" loading="lazy" width="48" height="48" />
+        <div class="feedback-content">
+          <div class="feedback-name">Amit, Jaipur</div>
+          <div class="feedback-stars" aria-label="5 star rating">★★★★★</div>
+          <p class="feedback-text">Excellent product, I feel stronger and more energetic.</p>
+        </div>
+      </article>
+      <article class="feedback-item">
+        <img src="https://randomuser.me/api/portraits/women/30.jpg" alt="Neha avatar" class="feedback-avatar" loading="lazy" width="48" height="48" />
+        <div class="feedback-content">
+          <div class="feedback-name">Neha, Chennai</div>
+          <div class="feedback-stars" aria-label="5 star rating">★★★★★</div>
+          <p class="feedback-text">Natural and effective, highly recommended!</p>
+        </div>
+      </article>
+      <article class="feedback-item">
+        <img src="https://randomuser.me/api/portraits/men/50.jpg" alt="Ravi avatar" class="feedback-avatar" loading="lazy" width="48" height="48" />
+        <div class="feedback-content">
+          <div class="feedback-name">Ravi, Hyderabad</div>
+          <div class="feedback-stars" aria-label="4 star rating">★★★★☆</div>
+          <p class="feedback-text">Good stamina booster, noticeable results.</p>
+        </div>
+      </article>
+      <article class="feedback-item">
+        <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Sonal avatar" class="feedback-avatar" loading="lazy" width="48" height="48" />
+        <div class="feedback-content">
+          <div class="feedback-name">Sonal, Ahmedabad</div>
+          <div class="feedback-stars" aria-label="5 star rating">★★★★★</div>
+          <p class="feedback-text">I feel more energetic and confident after using this.</p>
+        </div>
+      </article>
+      <article class="feedback-item">
+        <img src="https://randomuser.me/api/portraits/men/60.jpg" alt="Manoj avatar" class="feedback-avatar" loading="lazy" width="48" height="48" />
+        <div class="feedback-content">
+          <div class="feedback-name">Manoj, Lucknow</div>
+          <div class="feedback-stars" aria-label="5 star rating">★★★★★</div>
+          <p class="feedback-text">Highly effective and natural product, very satisfied.</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- Book Now Button 3 -->
+    <a href="/index1.html"><button class="btn-book" type="button" aria-label="Book Now">Book Now</button></a>
+
+    <div class="last">
+      <h1>view more </h1>
+    </div>
+
+    <footer class="mobile-footer">
+      <footer style="text-align:center; padding:10px; font-size:14px; background:hsl(224, 41%, 5%); color:#fff;">
+        <a href="https://www.duadawai.com" target="_blank" style="color:#fff; text-decoration:none;">
+          © 2025 Arif Pharma Private Limited. All Rights Reserved.
+        </a>
+      </footer>
+      
+      
+    </footer>
+    
+    <style>
+      .last{
+        height: 10px ;
+        /* width:px ; */
+      }
+      .mobile-footer {
+        background: hsl(224, 41%, 5%);
+        color: #f9fafb;
+        text-align: center;
+        padding: 8px 10px;
+        font-size: 13px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+      }
+      .mobile-footer a {
+        color: #60a5fa;
+        text-decoration: none;
+      }
+      .mobile-footer a:hover {
+        text-decoration: underline;
+      }
+      /* Sirf phone screens ke liye */
+      @media (min-width: 641px) {
+        .mobile-footer { display: none; }
+      }
+    </style>
+    
+        </body>
+       <script>
+  const slides = document.querySelector(".slides");
+  const slide = document.querySelectorAll(".slide");
+  const slideCount = slide.length;
+
+  // last slide ke baad first ko clone karke add karna
+  const firstClone = slide[0].cloneNode(true);
+  slides.appendChild(firstClone);
+
+  let index = 0;
+  let slideWidth = slide[0].clientWidth;
+
+  function showSlide() {
+    index++;
+    slides.style.transform = `translateX(${-index * slideWidth}px)`;
+    slides.style.transition = "transform 0.5s ease";
+
+    if (index === slideCount) {
+      setTimeout(() => {
+        slides.style.transition = "none"; // jump without animation
+        slides.style.transform = "translateX(0)"; // back to start
+        index = 0;
+      }, 500); // wait till animation ends
+    }
+  }
+
+  setInterval(showSlide, 7000); // 3 sec me slide move
+</script>
+
+
+        </html>

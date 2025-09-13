@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Payment Page</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 420px;
+      margin: auto;
+      background: #fff;
+      padding: 30px 25px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .option {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      padding: 12px 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    label:hover {
+      background-color: #f0f0f0;
+    }
+
+    .cod-note {
+      display: none;
+      background-color: #fff3cd;
+      border-left: 4px solid #ffc107;
+      color: #856404;
+      padding: 12px;
+      border-radius: 6px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #666;
+      margin-top: 10px;
+      text-align: center;
+    }
+    
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Select Payment Option</h2>
+
+    <div class="option">
+      <label>
+        <input type="radio" name="payment" value="cod" onclick="toggleCOD(true)" />
+        Cash on Delivery (Pay ₹50 now to confirm)
+      </label>
+
+      <label>
+        <input type="radio" name="payment" value="full" onclick="toggleCOD(false)" />
+        Pay Full Amount ₹1950 Now
+      </label>
+    </div>
+
+    <div class="cod-note" id="codNote">
+      Note: ₹50 advance is required to confirm your COD order. This amount will be adjusted at delivery.
+    </div>
+
+    <button onclick="proceedToPay()">Proceed to Pay</button>
+    <div class="note">You will be redirected to a secure payment gateway.</div>
+  </div>
+
+  <script>
+    function toggleCOD(show) {
+      const codNote = document.getElementById('codNote');
+      codNote.style.display = show ? 'block' : 'none';
+    }
+
+    function proceedToPay() {
+      const selected = document.querySelector('input[name="payment"]:checked');
+      if (!selected) {
+        alert("Please select a payment option.");
+        return;
+      }
+
+      if (selected.value === "cod") {
+        // Redirect to PayU ₹50 link
+        window.location.href = "https://u.payu.in/PAYUMN/xre1sdWf0rfM";
+      } else if (selected.value === "full") {
+        // Redirect to PayU ₹1950 link
+        window.location.href = "https://u.payu.in/PAYUMN/6I6b74qUvWGi";
+      }
+    }
+  </script>
+
+</body>
+</html>
