@@ -115,8 +115,21 @@
     margin: 20px 0;
     text-align: center;
     user-select: none;
+     animation: softBlink 1.5s infinite ease-in-out;
+
     
   }
+      @keyframes softBlink {
+  0%, 100% {
+    background-color: #5dd367;
+    transform: scale(1);
+  }
+  50% {
+    background-color: #4bb956; /* हल्का dark green */
+    transform: scale(1.05);   /* size थोड़ा बड़ा */
+  }
+}
+
   .btn-book:hover,
   .btn-book:focus {
     background-color: #5749b8;
@@ -726,6 +739,7 @@ window.onload = function() {
 
 
         </html>
+
 
 
 
